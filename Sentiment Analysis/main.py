@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 
 # Step 1: Get stock price data
 def get_stock_data(symbol, api_key):
-    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}'
+    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={"APPL"}&apikey={"K34RPEJZOW4GWF8N"}'
     response = requests.get(url)
     data = response.json()
-    df = pd.DataFrame.from_dict(data['Time Series (Daily)'], orient='index')
+    df = pd.DataFrame.from_dict(data['TIME_SERIES_DAILY_ADJUSTED'], orient='index')
     df = df.rename(columns={
         '1. open': 'Open',
         '2. high': 'High',
