@@ -1,4 +1,2 @@
 # StockThing
 Thing
-
-fuck you
