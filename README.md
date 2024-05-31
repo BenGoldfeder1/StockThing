@@ -1,3 +1,1 @@
 # StockThing
-Thing
-f
