@@ -1,35 +1,23 @@
 import yfinance as yf
 from yahoo_fin import stock_info as si
 
-def get_beta_values(stocks):
-    beta_values = {}
-    for stock in stocks:
-        try:
-            data = yf.download(stock, start='2023-01-01', end='2023-12-31')
-            beta = data['Close'].pct_change().cov(data['Close'].pct_change('SPY'))
-            beta_values[stock] = beta
-        except:
-            print(f"Failed to get beta value for {stock}")
+# Get all stocks on NASDAQ
+nasdaq_stocks = get_nasdaq_stocks()
+
+# Create a list to store high beta stocks
+high_beta_stocks = []
+
+# Iterate through each stock
+for stock in nasdaq_stocks:
+    # Get the beta value
+    beta = stock.info['beta']
     
-    return beta_values
-
-def save_high_beta_stocks(beta_values, threshold, output_file):
-    high_beta_stocks = [stock for stock, beta in beta_values.items() if beta > threshold]
-    with open(output_file, 'w') as file:
-        for stock in high_beta_stocks:
-            file.write(stock + '\n')
-
-# List of stocks to get beta values for
-def get_nasdaq_stocks():
-    nasdaq_stocks = si.tickers_nasdaq()
-    return nasdaq_stocks
-
-# List of stocks to get beta values for
-stocks = get_nasdaq_stocks()
-
-# Get beta values for the stocks
-# beta_values = get_beta_values(stocks)
-print(get_beta_values(['AAPL', 'GOOGL', 'MSFT']))
-
-# Save stocks with beta value over 1 to a text file
-save_high_beta_stocks(beta_values, 1, 'beta>1stocks.txt')
+    # Check if the beta value is greater than 1
+    if beta > 1:
+        # Add the stock symbol to the high beta stocks list
+        high_beta_stocks.append(stock.ticker)
+        
+# Write the high beta stocks to a text file
+with open('high_beta_stocks.txt', 'w') as file:
+    for stock in high_beta_stocks:
+        file.write(stock + '\n')
