@@ -13,9 +13,8 @@ for i in range(len(nasdaq_stocks)):
 # Create a list to store high beta stocks
 high_beta_stocks = []
 
-# Iterate through each stock and check if their 'beta' attribute is > 1
 for stock in nasdaq_stocks:
-    if stock.info['beta'] > 1:
+    if not stock.info.get('beta') or stock.info['beta'] < 1 or stock.info.get('marketCap') < 50000000:
         high_beta_stocks.append(stock.ticker)
 
 # Write the high beta stocks to a text file
