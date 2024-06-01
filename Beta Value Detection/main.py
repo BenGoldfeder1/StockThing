@@ -1,5 +1,4 @@
 import yfinance as yf
-import yfinance as yf
 from yahoo_fin import stock_info as si
 
 def get_beta_values(stocks):
@@ -29,7 +28,8 @@ def get_nasdaq_stocks():
 stocks = get_nasdaq_stocks()
 
 # Get beta values for the stocks
-beta_values = get_beta_values(stocks)
+# beta_values = get_beta_values(stocks)
+print(get_beta_values(['AAPL', 'GOOGL', 'MSFT']))
 
 # Save stocks with beta value over 1 to a text file
 save_high_beta_stocks(beta_values, 1, 'beta>1stocks.txt')
