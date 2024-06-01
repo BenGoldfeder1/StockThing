@@ -1,4 +1,5 @@
 # StockThing
+<<<<<<< HEAD
 
 # We are using yfinance API. The general format is as follows:
 
@@ -14,3 +15,5 @@ print(msft.info['ebitdaMargins'])
 
 # The programs connect as such:
 # Beta Value detection >1 -> Sentiment Analysis -> DCF Program -> Other Programs
+=======
+>>>>>>> 012ca3bfb1bc69ec02709fc7ec02f019808d767f
