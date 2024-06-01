@@ -1,8 +1,14 @@
 import yfinance as yf
 from yahoo_fin import stock_info as si
+import pandas as pd
 
 # Get all stocks on NASDAQ
-nasdaq_stocks = get_nasdaq_stocks()
+stonks = pd.DataFrame( si.tickers_nasdaq() )
+nasdaq_stocks = stonks[0].tolist()
+
+# Loop through the entire list and update each object
+for i in range(len(nasdaq_stocks)):
+    nasdaq_stocks[i] = yf.Ticker(nasdaq_stocks[i])
 
 # Create a list to store high beta stocks
 high_beta_stocks = []
